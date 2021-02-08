@@ -9,10 +9,18 @@ import { Todo } from "../components/Todo";
 
 export class TodoList extends Component {
   render() {
+    const { toggleComplete } = this.props;
     return (
       <>
         {this.props.todos.map((item, i) => {
-          return <Todo key={i} {...item} />;
+          return (
+            <Todo
+              key={i}
+              {...item}
+              toggleComplete={() => toggleComplete(i)}
+              completed={item.completed}
+            />
+          );
         })}
       </>
     );

@@ -9,19 +9,9 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todos: [
-        {
-          task: "Organize Garage",
-          id: 1528817077286,
-          completed: false,
-        },
-        {
-          task: "Bake Cookies",
-          id: 1528817084358,
-          completed: false,
-        },
-      ],
+      todos: [],
       value: "",
+      id: 0,
     };
   }
 
@@ -37,16 +27,38 @@ class App extends React.Component {
   };
 
   addTodo = () => {
-    this.setState({
-      todos: [
-        ...this.state.todos,
-        { completed: false, id: 1528817084358, task: this.state.value },
-      ],
-    });
+    this.setState(
+      {
+        todos: [
+          ...this.state.todos,
+          { completed: false, id: this.state.id, task: this.state.value },
+        ],
+      },
+      () => {
+        let newId = this.state.id + 1;
+        this.setState({
+          id: newId,
+        });
+      }
+    );
   };
 
   clear = () => {
     console.log("clear");
+  };
+
+  toggleComplete = (currentTodoId) => {
+    this.setState({
+      todos: this.state.todos.map((todo) => {
+        if (todo.id === currentTodoId) {
+          return {
+            ...todo,
+            completed: !todo.completed,
+          };
+        }
+        return todo;
+      }),
+    });
   };
 
   render() {
@@ -55,7 +67,10 @@ class App extends React.Component {
         <h1>Todo List: MVP</h1>
         <h2>Learn setState()</h2>
         <h2>Style my Todo List</h2>
-        <TodoList todos={this.state.todos} />
+        <TodoList
+          todos={this.state.todos}
+          toggleComplete={this.toggleComplete}
+        />
         <TodoForm
           onSubmit={this.onSubmit}
           value={this.state.value}
