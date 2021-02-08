@@ -7,7 +7,12 @@ export class TodoForm extends Component {
   render() {
     return (
       <>
-        <input type="text" value="" name="" onChange={this.props.onChange} />
+        <input
+          type="text"
+          value={this.props.value}
+          name=""
+          onChange={this.props.onChange}
+        />
         <button onClick={this.props.addTodo}>Add Todo</button>
         <button onClick={this.props.clear}>Clear</button>
       </>

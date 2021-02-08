@@ -21,11 +21,15 @@ class App extends React.Component {
           completed: false,
         },
       ],
+      value: "",
     };
   }
 
-  onChange = () => {
-    console.log("onchange");
+  onChange = (e) => {
+    const { value } = e.target;
+    this.setState({
+      value,
+    });
   };
 
   addTodo = () => {
@@ -44,6 +48,7 @@ class App extends React.Component {
         <h2>Style my Todo List</h2>
         <TodoList todos={this.state.todos} />
         <TodoForm
+          value={this.state.value}
           onChange={this.onChange}
           addTodo={this.addTodo}
           clear={this.clear}
