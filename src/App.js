@@ -44,7 +44,11 @@ class App extends React.Component {
   };
 
   clear = () => {
-    console.log("clear");
+    this.setState({
+      todos: this.state.todos.filter((item) => {
+        return item.completed !== true;
+      }),
+    });
   };
 
   toggleComplete = (currentTodoId) => {
