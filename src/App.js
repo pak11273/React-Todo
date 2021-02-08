@@ -32,8 +32,17 @@ class App extends React.Component {
     });
   };
 
+  onSubmit = (e) => {
+    e.preventDefault();
+  };
+
   addTodo = () => {
-    console.log("add");
+    this.setState({
+      todos: [
+        ...this.state.todos,
+        { completed: false, id: 1528817084358, task: this.state.value },
+      ],
+    });
   };
 
   clear = () => {
@@ -48,6 +57,7 @@ class App extends React.Component {
         <h2>Style my Todo List</h2>
         <TodoList todos={this.state.todos} />
         <TodoForm
+          onSubmit={this.onSubmit}
           value={this.state.value}
           onChange={this.onChange}
           addTodo={this.addTodo}
